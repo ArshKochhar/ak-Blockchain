@@ -21,6 +21,22 @@ class Transaction {
             signature: senderWallet.sign(outputMap)
         };
     }
+
+    static validTransaction(transaction) {
+        const { input: { address, amount, signature }, outputMap } = transaction;
+
+        const outputTotal = Object.values(outputMap)
+            .reduce((total, outputAmount) => total + outputAmount);
+
+            if (amount !== outputTotal) {
+                console.error(`Invalid transaction from ${address}`);
+                return false;
+
+        return true;
+    
+    }
+
+    
 }
 
 module.exports = Transaction;
